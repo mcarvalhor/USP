@@ -119,7 +119,7 @@ print("%.4f" % round(RMSE, 4))
 
 
 # == DEBUGGING ==
-imageio.imwrite("out_expected.png", Icomp)
-imageio.imwrite("out_generated.png", Inoisy)
+#imageio.imwrite("out_expected.png", Icomp)
+#imageio.imwrite("out_generated.png", Inoisy)
 
 

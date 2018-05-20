@@ -1,0 +1,19 @@
+Nome: Matheus Carvalho Raimundo
+E-mail: mcarvalhor@usp.br
+Nº USP: 10369014
+
+
+
+Fiz meu trabalho utilizando o conceito de TAD e de HashTable para processar as informações (como proposto no PDF do trabalho).
+
+== hashtable.c ==
+Utilizei todos os conceitos propostos por Thomas H. Cormen no livro "Introduction to Algorithms".
+Solucionei as colisões de forma "chaning".
+
+== ATM.c ==
+Este TAD está por trás do processamento das informações nas HashTables.
+Ele também faz a leitura das operações.
+
+== main.c ==
+Aqui se localiza as variáveis principais e a ordem dos eventos (inicialização, processamento, impressão, limpeza...).
+

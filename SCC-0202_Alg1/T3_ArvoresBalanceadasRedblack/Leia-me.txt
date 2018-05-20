@@ -1,0 +1,35 @@
+Nome:	Matheus carvalho Raimundo
+Nº USP:	10369014
+mcarvalhor@usp.br
+
+
+Implementei o minha árvore rubro-negra utilizando o livro do Cormen.
+O TAD RedBlackTree (Rubro-Negra) implementei com base no capítulo 13 do livro "Introduction to Algorithms", de Thomas H. Cormen.
+Isso significa que adotei os mesmos padrões do autor, como por exemplo um sentinela que substitui o 'NULL',
+e a variável 'colour' que indica a cor (BLACK=negra, RED=rubro) de um nó.
+
+NOTA: Fiz meu TAD RedBlackTree de uma forma genérica.
+Isso significa que eu trabalho com ponteiro para void (void *), e ponteiro para função para comparação e liberar da memória, por exemplo.
+Desta forma, esse TAD não funciona apenas para números, mas para structs, unions, ou qualquer outro tipo de dado.
+Obviamente que para este trabalho isso não seria necessário, mas eu o fiz assim para que eu mesmo possa utilizar no futuro.
+
+O programa (main.c) vai inicializar a árvore (O(1)) e depois escanear cada operação.
+	Se for 1 (inserir), ele vai inserir um número na árvore. O(logn)
+	Se for 2 (sucessor), ele vai imprimir o sucessor de um dado número na árvore. O(logn)
+		Se não houver sucessor, ou esse número não for encontrado, retorna uma mensagem de erro.
+	Se for 3 (predecessor), ele vai imprimir o predecessor de um dado número na árvore. O(logn)
+		Se não houver predecessor, ou esse número não for encontrado, retorna uma mensagem de erro.
+	Se for 4 (máximo), ele vai imprimir o maior valor na árvore. O(logn)
+		Se a árvore estiver vazia, retorna uma mensagem de erro.
+	Se for 5 (mínimo), ele vai imprimir o menor valor na árvore. O(logn)
+		Se a árvore estiver vazia, retorna uma mensagem de erro.
+	Se for 6 (pré-ordem), ele vai imprimir todos os valores na árvore de forma pré-ordem. O(n)
+	Se for 7 (em-ordem), ele vai imprimir todos os valores na árvore de forma em-ordem. O(n)
+	Se for 8 (pós-ordem), ele vai imprimir todos os valores na árvore de forma pós-ordem. O(n)
+	Se for qualquer outra coisa, não é uma operação válida. Retorna uma mensagem de erro. O(1)
+
+Ao fim da execução, a árvore é liberada da memória (O(n)).
+
+O TAD RBT (redblacktree.c) é quem opera diretamente sobre a árvore rubro-negra.
+
+Desenvolvido e testado em um ambiente do sistema Linux Mint, utilizando do compilador GCC.

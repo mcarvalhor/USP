@@ -1,0 +1,18 @@
+Nome:	Matheus carvalho Raimundo
+Nº USP:	10369014
+mcarvalhor@usp.br
+
+Implementei a minha calculadora de expressões utilizando Listas Generalizadas.
+Cada número real da expressão e operador é adicionado, em ordem, à lista.
+Caso ocorra um parênteses, será criado uma sublista que será inserida na lista principal (e assim por adiante).
+
+Quando a expressão já está formada, vamos calcular ela.
+A função que calcula vai resolver primeiramente todos os parênteses, depois as multiplicações e divisões, e depois soma e subtração.
+Caso ocorra em algum momento divisão por zero, essa função notificará, para que possamos imprimir que a expressão não é válida.
+
+Observação/Extra:
+	O TAD "super_file" adiciona algumas funções muito úteis a leitura e manipulação de streams (FILE *), como por exemplo ler um caractere sem consumir ele (PreviewChar), ou ignorar todos os caracteres nulos/brancos (ReadWhites) de uma stream.
+	Algumas funções desse TAD foram usadas nesse trabalho.
+	Esse TAD foi criado por mim (Matheus), mas não está completo. Pretendo incrementar suas funções com o tempo, assim que percebo a necessidade.
+
+Desenvolvido e testado em um ambiente do sistema Linux Mint, utilizando do compilador GCC.

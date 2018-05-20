@@ -1,0 +1,29 @@
+Nome:	Matheus carvalho Raimundo
+Nº USP:	10369014
+mcarvalhor@usp.br
+
+Implementei o meu dicionário utilizando Skip Lists.
+O TAD SkipList implementei com base nessa aula do MIT: https://goo.gl/nHWDo7.
+Isso significa que adotei os mesmos padrões dessa aula, como por exemplo o "Flip" da moeda (rand()%2),
+e a não necessidade de um limite superior para a lista (visto que a probabilidade de passar log(N) é muito baixa).
+
+O programa (main.c) vai escanear a operação.
+	Se for "insercao", ele vai inserir uma palavra e sua definição no dicionário.
+		Se a palavra já existir, retorna uma mensagem de erro.
+	Se for "alteracao", ele vai alterar a definição de uma palavra do dicionário.
+		Se a palavra não existir, retorna uma mensagem de erro.
+	Se for "remocao", ele vai remover uma palavra e sua definição do dicionário.
+		Se a palavra não existir, retorna uma mensagem de erro.
+	Se for "busca", ele vai imprimir uma palavra e sua definição.
+		Se a palavra não existir, retorna uma mensagem de erro.
+	Se for "impressao", ele vai imprimir todas as palavras que começam com uma determinada letra.
+		Se nenhuma palavra for impressa, retorna uma mensagem de aviso.
+
+O TAD SkipList (skiplist.c) vai operar sobre o dicionário com uma SkipList.
+
+Notas:
+Ele utiliza constantemente calloc, visto que calloc já coloca o '\0' nas strings e NULL nos ponteiros.
+Ele também utiliza um auxiliar, com a menor string possível (uma string vazia), para organizar a SkipList,
+como foi proposto na aula do MIT.
+
+Desenvolvido e testado em um ambiente do sistema Linux Mint, utilizando do compilador GCC.

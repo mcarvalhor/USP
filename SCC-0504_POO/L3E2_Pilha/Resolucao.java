@@ -4,7 +4,7 @@ import java.lang.Integer;
 
 
 /**
- * Classe
+ * Classe de exceções
  */
 class StackException extends Exception {
 

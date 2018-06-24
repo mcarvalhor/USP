@@ -1,0 +1,89 @@
+var SCRIPT_JSZIP = "https://stuk.github.io/jszip/dist/jszip.js";
+var SCRIPT_FILESAVER = "https://cdn.rawgit.com/eligrey/FileSaver.js/5ed507ef8aa53d8ecfea96d96bc7214cd2476fd2/FileSaver.min.js";
+
+
+scriptjj = document.createElement('script');
+scriptjj.src = SCRIPT_JSZIP;
+scriptjj.onload = ;
+document.body.appendChild(scriptjj);
+
+scriptjj = document.createElement('script');
+scriptjj.src = SCRIPT_FILESAVER;
+scriptjj.onload = ;
+document.body.appendChild(scriptjj);
+
+
+var zip = new JSZip();
+var error_arquivos = false;
+var counter = 0;
+A = $(".table-bordered tbody tr");
+for(i = 0; i < A.length; i++){
+	arqname = (i+1) + "_" + A.eq(i).find("td").eq(1)[0].innerHTML;
+	arqlink = A.eq(i).find("a:contains('Ver Detalhes')").eq(0)[0].href;
+	zip.folder(arqname);
+	$.ajax({
+		url: arqlink,
+		beforeSend: function(objj){
+			objj.arqname = arqname;
+			objj.arqlink = arqlink;
+			counter++;
+		},
+		success: function(data, textT, objj){
+			dataDOM = $(data);
+			B = dataDOM.find(".nav-pills a");
+			for(j = 0; j < B.length; j++){
+				var xhr = new XMLHttpRequest();
+				xhr.open('GET', B.eq(j)[0].href, true);
+				xhr.responseType = 'blob';
+				xhr.arqname = objj.arqname + "/" + B.eq(j)[0].innerHTML;
+				xhr.onload = function(e) {
+				  if (this.status == 200) {
+					zip.file(this.arqname, this.response);
+				  }	else error_arquivos = true;
+				  counter--;
+				};
+				counter++;
+				xhr.send();
+			}
+			B = dataDOM.find(".panel-heading-buttons a").eq(1)[0];
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', B.href, true);
+			xhr.responseType = 'blob';
+			xhr.arqname = objj.arqname + "/MinhaResolucao.c";
+			xhr.onload = function(e) {
+			  if (this.status == 200) {
+				/*ext = this.responseURL.replace(/\?.*$/g, "");
+				if(ext.match(/(.*)(\.[^.]{1,3})$/))
+					ext = ext.replace(/(.*)(\.[^.]{1,3})$/, "$2");
+				else
+					ext = ".c";*/
+				zip.file(this.arqname, this.response);
+			  }	else error_arquivos = true;
+			  counter--;
+			};
+			counter++;
+			xhr.send();
+			counter--;
+        },
+		error: function() {
+			error_arquivos = true;
+			counter--;
+		}
+    });
+}
+
+
+
+
+zip.generateAsync({type:"base64"}).then(function (base64) {
+    window.location="data:application/zip;base64," + base64;
+});
+
+zip.generateAsync({type:"blob"})
+.then(function (blob) {
+    saveAs(blob, "download.zip");
+});
+
+
+
+console.log(error_arquivos);

@@ -5,51 +5,65 @@
 using namespace std;
 
 
-long recursion(long M, long k, vector< vector<long> > &items, long counter[][256]) {
-	long i, N, aux;
+long max_this_person_can_take(long limitW, long takingW, long takingP, vector< pair<long, long> > &objects, bool *visited) {
+	long i, j, N, aux, counter;
+	bool *visitedAux;
 
-	if(M < 0)
-		return -1;
-	else if(!k)
+	if(takingW > limitW)
 		return 0;
+	if(takingW == limitW)
+		return takingP;
 
-	counter[M][k] = -1;
-	N = items[k - 1].size();
+	N = objects.size();
+	visitedAux = (bool *) malloc(sizeof(bool) * N);
 
-	for(i = 0; i < N; i++){
-		if((aux=recursion(M - items[k - 1][i], k - 1, items, counter)) != -1)
-			if(counter[M][k] < aux + items[k - 1][i])
-				counter[M][k] = aux + items[k - 1][i];
+	for(i = counter = 0; i < N; i++){
+		if(visited[i] == true)
+			continue;
+		for(j = 0; j < N; j++)
+			visitedAux[j] = visited[j];
+		visitedAux[i] = true;
+		aux = max_this_person_can_take(limitW, takingW + objects[i].second, objects[i].first, objects, visitedAux);
+		if(aux >= counter)
+			counter = aux;
 	}
 
-	return counter[M][k];
+	free(visitedAux);
+	return takingP + counter;
 }
 
 
 int main(int argc, char **argv) {
-	vector< vector<long> > items;
-	long i, j, k, N, M, C, K, S;
-	long counter[256][256];
+	long i, j, T, N, P, W, G, S;
+	vector< pair<long, long> > objects;
+	vector<long> family;
+	bool *visitedAux;
 
-	cin >> N;
-	for(i = 0; i < N; i++){
-		cin >> M >> C;
-		items = vector< vector<long> >(C);
-		for(j = 0; j < C; j++) {
-			cin >> K;
-			items[j] = vector<long>(K);
-			for(k = 0; k < K; k++){
-				cin >> items[j][k];
-			}
+	cin >> T;
+	for(i = 0; i < T; i++){
+
+		cin >> N;
+		objects = vector< pair<long, long> >(N);
+		visitedAux = (bool *) malloc(sizeof(bool) * N);
+		for(j = 0; j < N; j++) {
+			cin >> P >> W;
+			objects[j] = make_pair(P, W);
+			visitedAux[j] = false;
 		}
-		for(j = 0; j < 256; j++)
-			for(k = 0; k < 256; k++)
-				counter[j][k] = -2;
-		S = recursion(M, C, items, counter);
-		if(S < 0)
-			cout << "no solution\n";
-		else
-			cout << S << '\n';
+
+		cin >> G;
+		family = vector<long>(G);
+		for(j = 0; j < G; j++) {
+			cin >> family[j];
+		}
+
+		for(S = j = 0; j < G; j++) {
+			S += max_this_person_can_take(family[j], 0, 0, objects, visitedAux);
+		}
+
+		free(visitedAux);
+		cout << S << '\n';
+
 	}
 
 	return EXIT_SUCCESS;

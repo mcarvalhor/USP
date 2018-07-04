@@ -12,7 +12,7 @@ Ou seja, apenas o Switch 0 e 2, da direita para esquerda, devem estar ativados.
 
 
 Integrantes:
-	Leonardo Miassi Netto (Nº 9326688)
-	Matheus Carvalho Raimundo (Nº 10369014)
+* Leonardo Miassi Netto (Nº 9326688)
+* Matheus Carvalho Raimundo (Nº 10369014)
 
 

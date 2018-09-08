@@ -130,7 +130,7 @@ void DQ_Destroy(struct __deque_t *DQ){
 	struct __deque_node_t *P, *Aux;
 	if(DQ == NULL)	return;
 	P = DQ->first;
-	while(P != NULL){
+	while(P != NULL) {
 		Aux = P;
 		P = P->next;
 		free(Aux->value);

@@ -15,9 +15,6 @@
  *	|_______ _______|___|
  *
 */
-/*
-* Este código foi feito por eu mesmo (Matheus) para uso *exclusivo* para eu mesmo (Matheus).
-*/
 
 
 
@@ -97,7 +94,7 @@ void S_Destroy(struct __stack_t *S){
 	struct __stack_node_t *P, *Aux;
 	if(S == NULL)	return;
 	P = S->topper;
-	while(P != NULL){
+	while(P != NULL) {
 		Aux = P;
 		P = P->below;
 		free(Aux->value);

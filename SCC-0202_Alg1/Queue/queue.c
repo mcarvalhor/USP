@@ -15,9 +15,6 @@
  *	|_______ _______|___|
  *
 */
-/*
-* Este código foi feito por eu mesmo (Matheus) para uso *exclusivo* para eu mesmo (Matheus).
-*/
 
 
 
@@ -52,7 +49,7 @@ struct __queue_t *Q_New(size_t memsize){
 }
 
 long Q_Size(struct __queue_t *Q){
-	if(Q==NULL)	return -1;
+	if(Q == NULL)	return -1;
 	return Q->nitems;
 }
 
@@ -104,9 +101,9 @@ int Q_Shift(void *X, struct __queue_t *Q){
 
 void Q_Destroy(struct __queue_t *Q){
 	struct __queue_node_t *P, *Aux;
-	if(Q==NULL)	return;
+	if(Q == NULL)	return;
 	P = Q->first;
-	while(P != NULL){
+	while(P != NULL) {
 		Aux = P;
 		P = P->next;
 		free(Aux->value);
@@ -129,7 +126,7 @@ struct __priority_queue_t *PQ_New(size_t memsize, int (*fcmp)(void *, void *)){
 }
 
 long PQ_Size(struct __priority_queue_t *Q){
-	if(Q==NULL)	return -1;
+	if(Q == NULL)	return -1;
 	return Q->nitems;
 }
 
@@ -139,16 +136,16 @@ int PQ_Push(void *X, struct __priority_queue_t *Q){
 	Aux = (struct __queue_node_t *) malloc(sizeof(struct __queue_node_t));
 	Aux->value = (void *) malloc(Q->memsize);
 	memcpy(Aux->value, X, Q->memsize);
-	if(Q->nitems < 1){
+	if(Q->nitems < 1) {
 		Aux->next = NULL;
 		Q->first = Q->last = Aux;
-	}else if(Q->fcmp(Aux->value, Q->last->value) <= 0){
+	} else if(Q->fcmp(Aux->value, Q->last->value) <= 0){
 		Aux->next = NULL;
 		Q->last = Q->last->next = Aux;
-	}else{
+	} else {
 		P = Q->first;
 		Last = &Q->first;
-		while(P != NULL){
+		while(P != NULL) {
 			if(Q->fcmp(Aux->value, P->value) > 0)
 				break;
 			Last = &P->next;
@@ -193,9 +190,9 @@ int PQ_Shift(void *X, struct __priority_queue_t *Q){
 
 void PQ_Destroy(struct __priority_queue_t *Q){
 	struct __queue_node_t *P, *Aux;
-	if(Q==NULL)	return;
+	if(Q == NULL)	return;
 	P = Q->first;
-	while(P != NULL){
+	while(P != NULL) {
 		Aux = P;
 		P = P->next;
 		free(Aux->value);

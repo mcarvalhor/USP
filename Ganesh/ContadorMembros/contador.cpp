@@ -13,14 +13,14 @@ using namespace std;
 
 /*
  *	~  Contador de Membros Ganesh  ~
- *	Este programa vai fazer a contagem dos membros do Ganesh
- *	 e calcular a percentagem por curso e ano.
- *	Ele recebe como entrada o arquivo *.CSV da tabela dos membros
- *	 separado por COMMA.
+ *	Este programa vai fazer a contagem dos membros do Ganesh e calcular
+ *	 a percentagem por curso e ano.
+ *	Ele recebe como entrada o arquivo *.CSV da tabela dos membros separado
+ *	 por COMMA.
  *	Abaixo estão algumas definições de pré-compilação que podem ajudar.
  *
- * MATHEUS CARVALHO RAIMUNDO
- * mcarvalhor@usp.br
+ *	MATHEUS CARVALHO RAIMUNDO
+ *	mcarvalhor@usp.br
  *
  *	 _______ _______ _______
  *	|   |   |               \

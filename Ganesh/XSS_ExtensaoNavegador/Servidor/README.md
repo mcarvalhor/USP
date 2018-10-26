@@ -1,9 +1,9 @@
 # FormRobber (Servidor)
-Aqui está o código que fica armazenado no servidor que receberá os dados capturados pela extensão de navegador.
+Aqui está o código (HTML, PHP e SQL) que fica armazenado no servidor que receberá os dados capturados pela extensão de navegador.
 
 ## Como configurar os arquivos do servidor
 * Carregue todos os arquivos deste diretório ([config.php](config.php), [capture.php](capture.php), [admin.php](admin.php), [index.html](index.html), [jquery.min.js](jquery.min.js), [sleep.txt](sleep.txt) e [FormRobber.zip](FormRobber.zip)) em algum diretório do servidor. Deve haver suporte para PHP (com MySQLi) e MySQL Server.
-* Atualize o *.ZIP [FormRobber.zip](FormZipper.zip) se for desejável: a variável "formSubmitURL" do arquivo [main.js](../Extensao/main.js) presente neste arquivo não está atualizada com o endereço do servidor.
+* Atualize o *.ZIP [FormRobber.zip](FormRobber.zip) se for desejável: a variável "formSubmitURL" do arquivo [main.js](../Extensao/main.js) presente neste arquivo não está atualizada com o endereço do servidor.
 * Configure o arquivo [config.php](config.php): é necessário definir o endereço do servidor MySQL (ou _localhost_ caso seja na mesma máquina), o usuário do banco de dados, a senha do banco de dados e o nome do banco de dados. Além disso, é necessário definir uma senha de acesso ao painel de administrador ([admin.php](admin.php)), que por padrão é "admin".
 
 ## Como configurar o banco de dados MySQL

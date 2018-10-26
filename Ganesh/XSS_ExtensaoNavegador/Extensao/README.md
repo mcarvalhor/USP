@@ -3,7 +3,7 @@ Aqui está organizado o código (JavaScript) da extensão de navegador.
 Esta extensão funciona com o Google Chrome e Opera.
 
 ## Como instalar a extensão no navegador de internet
-* Altere o arquivo [main.js](main.js) de forma que a variável "formSubmitURL" tenha o endereço do servidor em questão, que receberá os dados capturados.
+* Altere o arquivo [main.js](main.js) de forma que a variável "formSubmitURL" tenha o endereço do servidor em questão, que receberá os dados capturados (deve ser o endereço completo para a página [capture.php](../Servidor/capture.php)).
 * Comprima todos os arquivos desta pasta ([jquery.min.js](jquery.min.js), [main.js](main.js) e [manifest.json](manifest.json)) em um único arquivo *.ZIP.
 * Inicie o navegador de internet em que a extensão será instalada.
 * Abra a página das extensões do navegador. No Google Chrome esta página é _chrome://extensions/_ e no Opera é _opera://extensions/_.

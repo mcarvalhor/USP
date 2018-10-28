@@ -40,6 +40,7 @@ $dbQuery = $dbCon->prepare($dbSql); // Prepara a query SQL para inserção no ba
 
 if(!$dbQuery) { // Deu erro pra fazer isso?
 	echo "Could not prepare database SQL." . PHP_EOL;
+	exit();
 }
 
 

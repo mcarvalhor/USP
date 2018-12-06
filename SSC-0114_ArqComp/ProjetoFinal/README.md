@@ -1,6 +1,12 @@
 # Trabalho Prático de Arquitetura de Computadores
 Trabalho de Arquitetura de Computadores.
 
+## Integrantes do grupo
+- Cezar Guimarães
+- Leonardo Moreira Kobe
+- Matheus Carvalho Raimundo
+- Pedro Pastorello Fernandes
+
 ## Executando
 O trabalho pode ser executado abrindo o arquivo [index.html](index.html) em qualquer navegador moderno. Recomendado: Google Chrome ou Mozilla Firefox.
 

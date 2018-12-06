@@ -1,0 +1,626 @@
+.PALHETA-DE-CORES {
+	color: rgb(226, 219, 209);
+	color: rgb(179, 149, 113);
+	color: rgb(143, 87, 50);
+	color: rgb(131, 36, 32);
+	color: rgb(44, 38, 38);
+}
+
+@media not all and (min-width: 800px) and (min-height: 650px) {
+	#main {
+		display:none;
+	}
+	#nojs {
+		display:none;
+	}
+	#noscreen {
+		display:block;
+		color:rgb(255,0,0);
+		font-weight:bold;
+		margin-top:2px;
+		margin-left:2px;
+		margin-bottom:2px;
+		margin-right:2px;
+		text-align: center;
+	}
+}
+
+@media all and (min-width: 800px) and (min-height: 650px) {
+	#main {
+		display: block;
+	}
+	#nojs {
+		display: block;
+		color:rgb(255,0,0);
+		font-weight:bold;
+		margin-top:2px;
+		margin-left:2px;
+		margin-bottom:2px;
+		margin-right:2px;
+		text-align: center;
+	}
+	#noscreen {
+		display: none;
+	}
+}
+
+body {
+	background-color: rgb(226, 219, 209);
+}
+
+/* Not Yet On W3C */
+::selection{
+	color: rgb(255,255,255);
+	background-color: rgba(0, 0, 0, 0.5);
+}
+::-webkit-scrollbar-track {
+	/*box-shadow: inset 0 0 6px rgba(0,0,0,0.5);*/
+	background-color: rgb(255, 255, 255);
+}
+
+::-webkit-scrollbar{
+	width: 12px;
+	background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb{
+	box-shadow: inset 0 0 7px rgba(44, 38, 38, 1);
+	background-color: rgba(0,0,0,0);
+	border-radius: 5px;
+}
+
+h1 {
+	color: rgb(131, 36, 32);
+}
+
+#noloadedjs {
+	color:rgb(255,0,0);
+	font-weight:bold;
+	margin-top:2px;
+	margin-left:2px;
+	margin-bottom:2px;
+	margin-right:2px;
+	text-align: center;
+}
+
+#cssTester {
+	display: none;
+}
+
+#blurBackground {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.75);
+	z-index: 10000;
+}
+
+#dialog {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	max-width: 400px;
+	transform: translateX(-50%) translateY(-50%);
+	border-radius: 5px;
+	padding: 15px;
+	background-color: rgb(255, 255, 255);
+	z-index: 10001;
+}
+#dialogMessage {
+	display: block;
+	text-align: justify;
+}
+#dialogMessage a {
+	color: rgb(0, 0, 0);
+}
+#dialogButtons {
+	display: block;
+	margin-top: 10px;
+}
+#dialogButtons a {
+	display: inline-block;
+	margin-left: 5px;
+	margin-right: 5px;
+	border-radius: 3px;
+	padding: 5px 10px;
+	color: rgb(0, 0, 0);
+	background-color: rgb(179, 149, 113);
+	text-decoration: none;
+}
+#dialogButtons a:hover {
+	color: rgb(255, 255, 255);
+	background-color: rgb(131, 36, 32);
+}
+
+#splashScreen {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	background-image: url(splash.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	/*background-size: contain;*/
+	width: 100%;
+	height: 100%;
+}
+
+#homeDefinition, #memoryDefinition, #requestsDefinition {
+	position: fixed;
+	padding: 15px;
+	border-radius: 10px;
+	background-color: rgb(255, 255, 255);
+	top: 50%;
+	left: 50%;
+	z-index: 5;
+	overflow: auto;
+}
+#homeDefinition {
+	width: 400px;
+	height: 450px;
+	margin-left: -200px;
+	margin-top: -215px;
+}
+#memoryDefinition {
+	width: 400px;
+	height: 430px;
+	margin-left: -200px;
+	margin-top: -215px;
+}
+#requestsDefinition {
+	width: 550px;
+	height: 430px;
+	margin-left: -275px;
+	margin-top: -215px;
+}
+
+#sidebar {
+	position: fixed;
+	width: 300px;
+	height: 400px;
+	top: 50%;
+	left: 0px;
+	opacity: 0.25;
+	margin-top: -200px;
+	margin-left: -280px;
+	padding: 10px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	background-color: rgb(255, 255, 255);
+	transition-property: margin-left, opacity;
+	transition-duration: 0.5s;
+	background-color: rgb(143, 87, 50);
+	color: rgb(255, 255, 255);
+	overflow: auto;
+	z-index: 5;
+}
+#sidebar.fixed {
+	margin-left: 0px;
+	opacity: 0.9;
+}
+#sidebar:hover {
+	opacity: 1;
+	margin-left: 0px;
+}
+#sidebar .buttons {
+	display: block;
+}
+#sidebar .buttons button {
+	display: inline-block;
+	font-size: 1.25em;
+	margin-right: 10px;
+}
+#sidebar .settings {
+	display: block;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+#sidebar .settings label {
+	display: block;
+}
+#sidebar #requests {
+	display: block;
+	margin-bottom: 15px;
+}
+#sidebar #requests .request {
+	display: block;
+}
+#sidebar #requests .request a {
+	color: rgb(255, 255, 255);
+	text-decoration: none;
+}
+#sidebar #requests .request a:hover {
+	text-decoration: underline;
+}
+#sidebar #requests .running a {
+	color: rgb(179, 149, 113);
+	cursor: default;
+}
+#sidebar #requests .done a {
+	color: rgb(44, 38, 38);
+	cursor: default;
+}
+#sidebar #requests .running a:hover, #sidebar #requests .done a:hover {
+	text-decoration: none;
+}
+
+#simulationFrame {
+	display: block;
+	position: fixed;
+	width: 100%;
+	height: 646px;
+	top: 50%;
+	left: 0px;
+	margin-top: -323px;
+	overflow: hidden;
+}
+#coresCPU {
+	display: block;
+	height: 300px;
+	margin: 0px 25px;
+	text-align: center;
+	white-space: nowrap;
+	overflow: hidden;
+}
+#coresCPU .core {
+	display: inline-block;
+	position: relative;
+	margin-left: 25px;
+	margin-right: 25px;
+	width: 300px;
+	height: 100%;
+	overflow: hidden;
+}
+#coresCPU .core .bus {
+	display: block;
+	position: absolute;
+	top: 0px;
+	left: 50%;
+	width: 14px;
+	height: 100%;
+	margin-left: -7px;
+	background-color: rgb(44, 38, 38);
+	z-index: -1;
+	overflow: hidden;
+}
+#coresCPU .core .notification {
+	display: inline-block;
+	position: absolute;
+	top: 256px;
+	left: 160px;
+	padding: 5px;
+	font-size: 0.75em;
+	background-color: rgb(44, 38, 38);
+	color: rgb(255, 255, 255);
+	overflow: hidden;
+}
+#coresCPU .core .coreCPU {
+	display: block;
+	width: 90px;
+	height: 80px;
+	line-height: 80px;
+	vertical-align: middle;
+	text-align: center;
+	margin: 0px auto;
+	border-width: 6px;
+	border-style: outset;
+	border-color:rgb(44, 38, 38);
+	background-color: rgb(179, 149, 113);
+	overflow: hidden;
+}
+#coresCPU .core .coreCache {
+	display: block;
+	margin-top: 50px;
+	width: 294px;
+	height: 100px;
+	border-width: 3px;
+	border-style: outset;
+	border-color:rgb(44, 38, 38);
+	background-color: rgb(179, 149, 113);
+	color: rgb(255, 255, 255);
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+#coresCPU .core .coreCache table {
+	display: block;
+}
+#coresCPU .core .coreCache table thead > tr {
+	position: sticky;
+	top: 0px;
+	background-color: rgb(44, 38, 38);
+}
+#coresCPU .core .coreCache table tr {
+	display: block;
+	padding: 3px 0px;
+}
+#coresCPU .core .coreCache table tbody tr:nth-child(even) {
+	background-color: rgba(179, 149, 113, 1);
+}
+#coresCPU .core .coreCache table tbody tr:nth-child(odd) {
+	background-color: rgba(143, 87, 50, 0.375)
+}
+#coresCPU .core .coreCache table tr td:first-child, #coresCPU .core .coreCache table tr th:first-child {
+	width: 131px!important;
+}
+#coresCPU .core .coreCache table tr td:last-child, #coresCPU .core .coreCache table tr th:last-child {
+	width: 131px!important;
+}
+#coresCPU .core .coreCache table tr td:first-child {
+	text-align: right;
+	padding-right: 5px;
+}
+#coresCPU .core .coreCache table tr td:last-child {
+	text-align: right;
+}
+#coresCPU .core .coreCache table tr td:last-child span {
+	display: block;
+}
+
+#scrollLeft, #scrollRight {
+	display: block;
+	position: absolute;
+	top: 33px;
+	width: 25px;
+	height: 25px;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center center;
+	filter: grayscale(100%);
+	opacity: 0.5;
+	transition-property: opacity, filter;
+	transition-duration: 0.25s;
+}
+#scrollLeft {
+	cursor: w-resize;
+	background-image: url(leftArrow.png);
+	left: 25px;
+}
+#scrollRight {
+	cursor: e-resize;
+	background-image: url(rightArrow.png);
+	right: 25px;
+}
+#scrollLeft:hover, #scrollRight:hover {
+	filter: none;
+	opacity: 1;
+}
+
+#memoryBus {
+	display: block;
+	margin: 0px 25px;
+	height: 40px;
+	background-color: rgb(44, 38, 38);
+	color: rgb(255, 255, 255);
+	line-height: 40px;
+	vertical-align: middle;
+	text-align: center;
+	overflow: hidden;
+}
+#memoryBus.animated {
+	background-image: url(animatedBus.gif);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+}
+
+#mainMemoryBus {
+	display: block;
+	width: 15px;
+	height: 100px;
+	margin: 0px auto;
+	background-color: rgb(44, 38, 38);
+	overflow: hidden;
+}
+
+#mainMemory {
+	display: block;
+	margin: 0px auto;
+	width: 300px;
+	height: 200px;
+	border-width: 3px;
+	border-style: outset;
+	border-color:rgb(44, 38, 38);
+	color: rgb(255, 255, 255);
+	background-color: rgb(179, 149, 113);
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+#mainMemory table {
+	display: block;
+}
+#mainMemory table thead > tr {
+	position: sticky;
+	top: 0px;
+	background-color: rgb(44, 38, 38);
+}
+#mainMemory table tr {
+	display: block;
+	padding: 3px 0px;
+}
+#mainMemory table tbody tr:nth-child(even) {
+	background-color: rgba(179, 149, 113, 1);
+}
+#mainMemory table tbody tr:nth-child(odd) {
+	background-color: rgba(143, 87, 50, 0.375)
+}
+#mainMemory table tr td:first-child, #mainMemory table tr th:first-child {
+	width: 134px!important;
+}
+#mainMemory table tr td:last-child, #mainMemory table tr th:last-child {
+	width: 134px!important;
+}
+#mainMemory table tr td:first-child {
+	text-align: right;
+	padding-right: 5px;
+}
+#mainMemory table tr td:last-child {
+	text-align: right;
+}
+
+form {
+	display: block;
+}
+
+form .field {
+	display: block;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+form .field label {
+	font-weight: bold;
+}
+form .field input, form .field select, form .field textarea {
+	display: block;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	width: 200px;
+	/*font-size: 1.25em;
+	width: 280px;*/
+}
+form .field button {
+	font-size: 1.25em;
+	margin-right: 10px;
+}
+form .field a {
+	display: inline-block;
+	margin-left: 3px;
+	margin-right: 3px;
+	border-radius: 3px;
+	padding: 5px 10px;
+	color: rgb(0, 0, 0);
+	background-color: rgb(179, 149, 113);
+	text-decoration: none;
+}
+form .field a:hover {
+	color: rgb(255, 255, 255);
+	background-color: rgb(131, 36, 32);
+}
+
+form .table {
+	display: block;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+form .table thead > tr {
+	position: sticky;
+	top: -15px;
+	background-color: rgb(179, 149, 113);
+}
+form .table tr {
+	display: block;
+	padding: 3px 0px;
+}
+form .table tbody tr:nth-child(even) {
+	background-color: rgba(226, 219, 209, 1);
+}
+form .table tbody tr:nth-child(odd) {
+	background-color: rgba(226, 219, 209, 0.25);
+}
+form .table tr td:first-child, form .table tr th:first-child {
+	width: 230px!important;
+}
+form .table tr td:last-child, form .table tr th:last-child {
+	width: 150px!important;
+}
+form .table tr td:first-child {
+	text-align: right;
+	padding-right: 5px;
+}
+form .table input {
+	display: block;
+	margin: 0 auto;
+	width: 140px;
+	text-align: right;
+}
+
+form .list {
+	display: block;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+form .list table {
+	display: block;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+form .list table thead > tr {
+	position: sticky;
+	top: -15px;
+	background-color: rgb(179, 149, 113);
+}
+form .list table tr {
+	display: block;
+	padding: 3px 0px;
+}
+form .list table tbody tr:nth-child(even) {
+	background-color: rgba(226, 219, 209, 1);
+}
+form .list table tbody tr:nth-child(odd) {
+	background-color: rgba(226, 219, 209, 0.25);
+}
+form .list table tr td:nth-child(1), form .list table tr th:nth-child(1) {
+	width: 85px!important;
+}
+form .list table tr td:nth-child(2), form .list table tr th:nth-child(2) {
+	width: 240px!important;
+	text-align: center;
+}
+form .list table tr td:nth-child(3), form .list table tr th:nth-child(3) {
+	width: 130px!important;
+}
+form .list table tr td:nth-child(4), form .list table tr th:nth-child(4) {
+	width: 70px!important;
+	text-align: center;
+}
+form .list table tr td:nth-child(1) input {
+	display: block;
+	margin: 0 auto;
+	width: 60px;
+}
+form .list table tr td:nth-child(2) select {
+	width: 100px;
+}
+form .list table tr td:nth-child(2) input {
+	width: 110px;
+}
+form .list table tr td:nth-child(3) input {
+	display: block;
+	margin: 0 auto;
+	width: 110px;
+}
+form .list table tr td:nth-child(4) a {
+	display: inline-block;
+	border-radius: 0px;
+	padding: 3px 3px;
+	color: rgb(0, 0, 0);
+	background-color: rgb(179, 149, 113);
+	text-decoration: none;
+}
+form .list table tr td:nth-child(4) a:first-child {
+	border-top-left-radius: 2px;
+	border-bottom-left-radius: 2px;
+}
+form .list table tr td:nth-child(4) a:last-child {
+	border-top-right-radius: 2px;
+	border-bottom-right-radius: 2px;
+}
+form .list table tr td:nth-child(4) a:hover {
+	color: rgb(255, 255, 255);
+	background-color: rgb(131, 36, 32);
+}
+form .list > input {
+	display: block;
+	width: 520px;
+	opacity: 0.5;
+	margin: 5px auto;
+	text-align: center;
+}
+form .list > input:hover {
+	opacity: 1;
+}
+form .hidden {
+	display: none;
+}
+

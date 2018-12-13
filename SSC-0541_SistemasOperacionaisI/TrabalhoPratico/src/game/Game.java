@@ -8,6 +8,7 @@ import java.util.concurrent.Semaphore;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import drawable.Drawable;
 import resources.Resources;
 import resources.Utils;
 import score.Score;
@@ -84,12 +85,26 @@ public class Game implements Serializable, Runnable {
 	 */
 	@Override
 	public void run() {
+		Drawable ens[], wes[], tow;
 		Enemy e;
 		while(true) {
 			Utils.acquireLock(GameScreen.game.pause);
 			GameScreen.game.pause.release();
-			if(GameScreen.game.state != 0)
+			if(GameScreen.game.state != 0) {
+				Utils.acquireLock(mutex);
+				ens = (Enemy[]) enemies.toArray(new Enemy[0]);
+				wes = (Weapon[]) weapons.toArray(new Weapon[0]);
+				tow = (Tower) tower;
+				mutex.release();
+				for(Drawable dw : ens) {
+					Utils.joinThread(dw.runningThread);
+				}
+				for(Drawable dw : wes) {
+					Utils.joinThread(dw.runningThread);
+				}
+				Utils.joinThread(tow.runningThread);
 				return;
+			}
 			if(semester >= 5) {
 				gameWon();
 			} else if(test >= 5) {
@@ -104,8 +119,8 @@ public class Game implements Serializable, Runnable {
 					e = new Enemy(semester, test);
 					Utils.acquireLock(mutex);
 					enemies.add(e);
-					mutex.release();
 					e.init();
+					mutex.release();
 				//}
 				Utils.sleep(2500 - ((semester + 1) * (test + 1) * 100));
 				continue;
@@ -148,21 +163,10 @@ public class Game implements Serializable, Runnable {
 
 	public void gameOver() {
 		state = 1;
-		finish();
 	}
 
 	public void gameWon() {
 		state = 2;
-		finish();
-	}
-
-	public void finish() {
-		for(Enemy e : enemies)
-			Utils.joinThread(e.runningThread);
-		for(Weapon w : weapons)
-			Utils.joinThread(w.runningThread);
-		Utils.joinThread(tower.runningThread);
-		Utils.joinThread(this.runningThread);
 	}
 
 	public ArrayList<Enemy> getEnemies() {

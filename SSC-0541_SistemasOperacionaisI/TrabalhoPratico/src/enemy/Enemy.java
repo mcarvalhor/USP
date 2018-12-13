@@ -10,16 +10,17 @@ import java.awt.*;
 @SuppressWarnings("serial")
 public class Enemy extends Drawable {
 
-	private int aspect;
+	private int aspect, killScore;
 
 	public Enemy(int semester, int test) {
 		super();
 		int i;
 
-		this.life = (semester + 1) * (test + 1) * 10;
+		this.life = (semester + 1) * (Utils.getRandom().nextInt(test + 1) + 1) * 5;
+		this.speed = 325 - (Utils.getRandom().nextInt((semester + 1) * (test + 1) * 10 + 1) + (semester + 1) * 10);
 		this.damage = (semester + 1) * (test + 1) * 2;
-		this.speed = 250 - ((semester + 1) * (test + 1) * 10);
 		this.aspect = Utils.getRandom().nextInt(10);
+		this.killScore = (int) ((325 - this.speed) * this.life * this.damage);
 		if(this.aspect < 2) {
 			this.aspect = 0;
 		} else if(this.aspect < 6) {
@@ -62,7 +63,7 @@ public class Enemy extends Drawable {
 				this.resource = Resources.Image.DIED_ENEMY;
 				Utils.sleep(500);
 				Utils.acquireLock(GameScreen.game.mutex);
-				GameScreen.game.score += 10;
+				GameScreen.game.score += this.killScore;
 				GameScreen.game.getEnemies().remove(this);
 				GameScreen.game.killedEnemies++;
 				GameScreen.game.mutex.release();
@@ -76,7 +77,7 @@ public class Enemy extends Drawable {
 				Point p = new Point((int) this.getPosition().getX() + 1, (int) this.getPosition().getY());
 				this.setPosition(p);
 			}
-			Utils.sleep((long) (this.speed)); // Dorme a thread por 100ms (isso controla a velocidade)
+			Utils.sleep((long) (this.speed)); // Dorme a thread por speed ms (isso controla a velocidade)
 		}
 	}
 

@@ -112,7 +112,7 @@ public class Home extends JFrame implements ActionListener {
 
 		if (src == newGameButton) {
 			String player = JOptionPane.showInputDialog(this, "Player: ", "Seu nome", JOptionPane.QUESTION_MESSAGE);
-			if(!player.equals("")) {
+			if(player != null && !player.equals("")) {
 				this.setVisible(false);
 				new GameScreen(this, player);
 			}

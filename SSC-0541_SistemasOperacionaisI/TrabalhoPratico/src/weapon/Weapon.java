@@ -48,6 +48,7 @@ public class Weapon extends Drawable {
 		Utils.sleep(1000);
 		Utils.acquireLock(GameScreen.game.mutex);
 		GameScreen.game.getWeapons().remove(this);
+		GameScreen.game.score += this.damage * 10;
 		GameScreen.game.mutex.release();
 	}
 }

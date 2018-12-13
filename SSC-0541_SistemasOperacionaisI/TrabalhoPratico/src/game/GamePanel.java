@@ -29,17 +29,15 @@ public class GamePanel extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		Utils.acquireLock(GameScreen.game.getTower().mutex);
+		Utils.acquireLock(GameScreen.game.mutex);
 		for(Drawable dw : GameScreen.game.getEnemies()){
 			dw.draw(g);
 		}
 		for(Drawable dw : GameScreen.game.getWeapons()) {
 			dw.draw(g);
 		}
-		GameScreen.game.getTower().mutex.release();
-
 		GameScreen.game.getTower().draw(g);
-
+		GameScreen.game.mutex.release();
 	}
 
 	/**

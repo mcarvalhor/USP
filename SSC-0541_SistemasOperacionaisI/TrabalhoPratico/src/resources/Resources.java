@@ -96,7 +96,7 @@ public class Resources {
 				WOLFRAM_START = 8,
 				WOLFRAM_END = 8,
 				BACKGROUND_START = 9,
-				BACKGROUND_END = 9;
+				BACKGROUND_END = 13;
 
 		/**
 		 * Caminho para os áudios que serão carregados.
@@ -111,7 +111,11 @@ public class Resources {
 				"possani4.wav",
 				"mesalva.wav",
 				"wolfram.wav",
-				"aria-math.wav"
+				"aria-math.wav",
+				"pvz-treasure.wav",
+				"t-run.wav",
+				"defend-bombsite.wav",
+				"gta-wanted8.wav"
 		};
 
 		/**

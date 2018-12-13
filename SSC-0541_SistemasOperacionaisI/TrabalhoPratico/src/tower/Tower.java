@@ -13,12 +13,13 @@ import java.awt.*;
 @SuppressWarnings("serial")
 public class Tower extends Drawable {
 
-	
+	public static final int maxLife = 1000;
+
 	public Tower() {
 		this.position = new Point(80, 0);
 		this.size = new Dimension(20, 50);
 		this.resource = Resources.Image.TOWER;
-		this.life = 1000;
+		this.life = maxLife;
 	}
 
 	/**

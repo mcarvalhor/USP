@@ -1,6 +1,6 @@
-# Trabalho 1 de Introdução a Redes Neurais
+# Trabalho 2 de Introdução a Redes Neurais
 
-Neste repositório encontram-se os arquivos do Trabalho 1 de Introdução à Redes Neurais de 2019.1.
+Neste repositório encontram-se os arquivos do Trabalho 2 de Introdução à Redes Neurais de 2019.1.
 
 # Grupo
 	- João Victor Garcia Coelho (Nº 10349540)

@@ -11,11 +11,11 @@ Null1 = 100 # Qtd de campos NOME nulos
 Null2 = 100 # Qtd de campos CARGO nulos
 Null3 = 200 # Qtd de campos TELEFONE nulos
 Null4 = 500 # Qtd de campos SALARIO nulos
-tamVariaveis = 46 # Tamanho maximo total dos dois campos variaveis
+tamVariaveis = 2000 # Tamanho maximo total dos dois campos variaveis
 
 if len(sys.argv) != 3 and len(sys.argv) != 4:
-    print("Passe o nome do arquivo csv de entrada de cadastro, de salarios, e o nome do csv de saida respectivamente junto ao terminal.")
-    print("\tpython3 codigo.py CADASTRO.CSV SALARIOS.CSV SAIDA.CSV")
+    print("Passe o nome do arquivo csv de entrada de cadastro, de salarios/remoneracoes, e o nome do inicio do csv de saida respectivamente junto ao terminal.")
+    print("\tpython3 codigo.py CADASTRO.CSV SALARIOS.CSV SAIDA")
     sys.exit()
 
 
@@ -36,7 +36,8 @@ def truncarCamposVariaveis(nome, cargo):
                   if unicodedata.category(c) != 'Mn')
     nome = nome.upper().replace('Ç', 'C').replace(csvDel, '').strip()
     cargo = cargo.upper().replace('Ç', 'C').replace(csvDel, '').strip()
-    return [nome, cargo] # Não truncar
+    nome = re.sub(r'[^a-zA-Z0-9\-\_\s\.]+', ' ', nome)
+    cargo = re.sub(r'[^a-zA-Z0-9\-\_\s\.]+', ' ', cargo)
     if len(nome+cargo) <= tamVariaveis:
         return [nome, cargo]
     i = 0

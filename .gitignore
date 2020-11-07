@@ -1,6 +1,7 @@
 # IDES
 .idea/
 .vscode/
+.ipynb_checkpoints/
 
 # Downloaded Libraries
 node_modules/

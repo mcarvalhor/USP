@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,user-scalable=no">
+	<meta name="robots" content="noindex,nofollow,noarchive,noimageindex">
+	<link rel="icon" type="image/png" href="/static/img/logo-small.png">
+	<link rel="stylesheet" href="/static/css/base.css">
+	<title>Busca{% if query is defined %}: {{ query }}{% endif %}</title>
+</head>
+
+<body>
+	<div id="main">
+		<div class="header">
+			<div class="large-logo-link">
+				<a href="/home" class="logo-link">
+					<img src="/static/img/logo.png" alt="Meu Brasil">
+				</a>
+			</div>
+			<div class="small-logo-link">
+				<a href="/home" class="logo-link">
+					<img src="/static/img/logo-small.png" alt="Meu Brasil">
+				</a>
+			</div>
+			{% if advanced_search %}
+			<a href="/search" class="">Busca Avançada</a>
+			{% else %}
+			<div class="search-box">
+				<form action="/search" class="inline-form" method="get">
+					<div class="field text">
+						<input type="text" name="q" maxlength="1024" placeholder="(buscar um bem-cultural)" value="{{ query }}">
+					</div>
+					<div class="field buttons">
+						<button type="submit">&#128269;</button>
+					</div>
+				</form>
+			</div>
+			{% endif %}
+		</div>
+		<div class="content">
+			{% if advanced_search %}
+			<div class="search-form">
+				<form action="/search" class="form" method="get">
+					<div class="field text">
+						<input type="text" name="q" maxlength="512" placeholder="O que deseja buscar?" value="" required>
+						<p class="small">Digite o nome de um bem-cultural que deseja buscar.</p>
+					</div>
+					<div class="field select">
+						<select name="city">
+							<option value="" selected>(qualquer cidade)</option>
+							{% for city in cities %}
+							<option value="{{ city[0] }}-{{ city[1] }}">{{ city[0] }} - {{ city[1] }}</option>
+							{% endfor %}
+						</select>
+						<p class="small">Se você deseja ver bens-culturais apenas de uma determinada cidade, selecione-a aqui.</p>
+					</div>
+					<div class="field select">
+						<select name="kind">
+							<option value="" selected>(qualquer tipo de bem-cultural)</option>
+							<option value="MONUMENTO">Monumento</option>
+							<option value="EDFTOMBADA">Edificação Tombada</option>
+							<option value="OBRA">Obra</option>
+							<option value="MUSICA">Música</option>
+							<option value="FILME">Filme</option>
+							<option value="ESPACOPUBLICO">Espaço Público</option>
+							<optgroup label="-----">
+								<option value="museu">Museu</option>
+								<option value="estudio">Estúdio</option>
+								<option value="cinemateca">Cinemateca</option>
+							</optgroup>
+						</select>
+						<p class="small">Filtre pela natureza do bem-cultural.</p>
+					</div>
+					<div class="field select">
+						<select name="order">
+							<option value="" selected>Ordernar por Relevância</option>
+							<option value="titulo">Ordernar por Título</option>
+							<option value="datacadastro">Ordernar por Data de Cadastro</option>
+							<option value="id">Ordernar por ID</option>
+						</select>
+					</div>
+					<div class="field checkbox">
+						<label><input type="checkbox" name="order-inverted" value="true"> Ordenação invertida.</label>
+					</div>
+					<div class="field buttons">
+						<button type="submit">Buscar &#187;</button>
+					</div>
+				</form>
+			</div>
+			{% else %}
+				{% if found|length < 1 %}
+				<p class="db-noitem">Nenhum resultado encontrado!</p>
+				{% endif %}
+				{% for item in found %}
+				<a href="/view/{{ item[0] }}" class="db-item">
+					<span class="title">{{ item[1] }}</span>
+					<span class="kind">{{ item[4] }}</span>
+					<span class="city">{{ item[2] }} - {{ item[3] }}</span>
+					<p class="description">{{ item[5] }}</p>
+				</a>
+				{% endfor %}
+				{% if previousPageURL is not none %}
+				<a href="{{ previousPageURL }}" class="navigation-link">&#8592;</a>
+				{% endif %}
+				{% if nextPageURL is not none %}
+				<a href="{{ nextPageURL }}" class="navigation-link">&#8594;</a>
+				{% endif %}
+			{% endif %}
+		</div>
+		<div class="footer">
+			<p>2021 - Trabalho de Bases de Dados - <a href="/setup">(reconstruir a base de dados)</a></p>
+		</div>
+	</div>
+	<div id="main-noscreen">
+		<span>Sua tela é muito pequena para exibir esta página web.</span>
+	</div>
+</body>
+
+</html>

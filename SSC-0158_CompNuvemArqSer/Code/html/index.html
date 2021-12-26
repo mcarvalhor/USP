@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,user-scalable=no">
+	<meta name="robots" content="noindex,nofollow,noarchive,noimageindex">
+	<link rel="icon" type="image/png" href="logo-small.png">
+	<link rel="stylesheet" href="base.css">
+	<link rel="stylesheet" href="index.css">
+	<title>Twitter Analyser</title>
+</head>
+
+<body style="overflow: auto;">
+	<div id="main">
+		<div class="header">
+			<div class="large-logo-link">
+				<a href="index.html" onclick="return false;" class="current logo-link">
+					<img src="logo.png" alt="Twitter Analyser">
+				</a>
+			</div>
+			<div class="small-logo-link">
+				<a href="index.html" class="current logo-link">
+					<img src="logo-small.png" alt="Twitter Analyser">
+				</a>
+			</div>
+			<a href="dbs.html">Bases de Dados</a>
+			<a href="analysis.html">Análises</a>
+		</div>
+		<div class="content">
+			<h2>
+				Bem-vinde ao Twitter Analyser.
+			</h2>
+			<p>
+				Você tem duas áreas aqui: as bases de dados e as análises.
+			</p>
+			<p>
+				As <a href="dbs.html">Bases de Dados</a> são os conjuntos de tweets que você pretende analisar ou armazenar.
+				Ao criar uma base de dados, você vai especificar um critério de busca (uma hashtag, usuário, palavra-chave, etc) e um nome para sua base de dados (qualquer nome para você mesmo identificar ela).
+				Após criar a base de dados, o Twitter Analyser automaticamente vai começar a buscar todos os tweets e armazenar nesta base de dados - e você nem precisa manter a janela do navegador aberta.
+				Você pode simplesmente deixar eles salvos lá, ou pode fazer uma análise por cima destes dados.
+			</p>
+			<p>
+				As <a href="analysis.html">Análises</a> são estudos que você realiza por cima de uma base de dados. Sendo assim, não tem como realizar uma análise sem antes ter criado uma base de dados.
+				Na Análise você vai especificar qual base de dados quer usar, e quais critérios quer utilizar para análisar e separar os tweets em subgrupos, além de um nome para sua nova análise (qualquer nome para você mesmo identificar ela).
+				Após criar a análise, o Twitter Analyser automaticamente vai começar a processar os dados e ir mostrando para você os resultados.
+				Assim como nas bases de dados, não é necessário manter a janela do navegador aberta: então você pode criar sua análise e voltar depois para verificar o progresso ou os resultados.
+			</p>
+			<h3>
+				Vamos começar?
+			</h3>
+			<p>
+				Vá em <a href="dbs.html">Bases de Dados</a> e crie uma base de dados qualquer.
+				Tome um café ou assista um episódio de sua série favorita enquanto o Twitter Analyser vai buscar os tweets para você.
+				Quando sua base de dados terminar a busca, acesse as <a href="analysis.html">Análises</a> e crie uma Análise para a sua base de dados.
+				As análises costumam ser processadas mais rapidamente - até mesmo instantaneamente, dependendo dos parâmetros de busca e do tamanho da base de dados.
+				Quando pronto, você verá os resultados direto na sua tela.
+			</p>
+			<p>
+				<strong>Ah, uma coisa importante: </strong> não desligue o servidor em que o Twitter Analytics está hospedado.
+				Se você desligar o servidor ou encerrar algum processo importante na máquina, pode ser que algo pare de funcionar!
+				Se você precisar desligar, primeiro interrompa qualquer análise ou busca de base de dados que tiver sendo realizada, e depois encerre de maneira segura - encerrando todos os processos juntos, ou o contâiner do Docker.
+				E nunca manipule o banco de dados diretamente! Você pode por acidente realizar alguma alteração que fará o Twitter Analytics parar de funcionar.
+			</p>
+		</div>
+		<div class="footer">
+			<p>Twitter Analyser - Todos os dados disponibilizados nesta página são obtidos através da API pública do Twitter.</p>
+		</div>
+	</div>
+	<div id="main-noscreen">
+		<!-- <span>Your screen is too small to display this webpage.</span> -->
+		<span>Sua tela é muito pequena para exibir esta página web.</span>
+	</div>
+</body>
+
+</html>

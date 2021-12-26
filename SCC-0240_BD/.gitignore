@@ -1,0 +1,9 @@
+# IDEs
+.idea/
+.vscode/
+
+# Config file
+config.json
+
+# Generated files
+__pycache__

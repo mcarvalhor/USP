@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,user-scalable=no">
+	<meta name="robots" content="noindex,nofollow,noarchive,noimageindex">
+	<link rel="icon" type="image/png" href="logo-small.png">
+	<link rel="stylesheet" href="base.css">
+	<link rel="stylesheet" href="analysis.css">
+	<title>Twitter Analyser: Análises</title>
+	<script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" src="analysis.js"></script>
+</head>
+
+<body style="overflow: auto;">
+	<div id="main">
+		<div class="header">
+			<div class="large-logo-link">
+				<a href="index.html" class="logo-link">
+					<img src="logo.png" alt="Twitter Analyser">
+				</a>
+			</div>
+			<div class="small-logo-link">
+				<a href="index.html" class="logo-link">
+					<img src="logo-small.png" alt="Twitter Analyser">
+				</a>
+			</div>
+			<a href="dbs.html">Bases de Dados</a>
+			<a href="analysis.html" onclick="updateData(); return false;" class="current">Análises</a>
+		</div>
+		<div class="content">
+			<div id="content-loading" style="display: block;">
+				<img src="loading.gif">
+			</div>
+			<div id="content-error" style="display: none;">
+				<p>Infelizmente não foi possível carregar os seus dados.</p>
+			</div>
+			<div id="content-data" style="display: none;">
+			</div>
+			<div id="content-edit" style="display: none;">
+				<form action="?" class="form" method="post" onsubmit="saveAN(this); return false;" onreset="resetForm();">
+					<input type="hidden" name="id" value="">
+					<div class="field text">
+						<input type="text" name="name" maxlength="120" placeholder="(Nome)" value="" required>
+						<p class="small">Um nome para sua análise. Por exemplo, o nome pode ser "Análise dos Tweets da Copa do Mundo de 2022".</p>
+					</div>
+					<div class="field textarea">
+						<textarea name="description" maxlength="10240" placeholder="(Descrição)"></textarea>
+						<p class="small">Uma descrição da sua análise. É opcional.</p>
+					</div>
+					<div class="field buttons">
+						<button type="submit">Salvar &#187;</button>
+						<button type="reset">Cancelar &#171;</button>
+						<button type="button" onclick="removeAN();" class="red">Remover &#215;</button>
+					</div>
+				</form>
+			</div>
+			<div id="content-create" style="display: none;">
+				<form action="?" class="form" method="post" onsubmit="createAN(this); return false;" onreset="resetForm();">
+					<input type="hidden" name="timezone_offset" value="">
+					<div class="field text">
+						<input type="text" name="name" maxlength="120" placeholder="(Nome)" value="" required>
+						<p class="small">Um nome para sua análise. Por exemplo, o nome pode ser "Análise dos Tweets da Copa do Mundo de 2022".</p>
+					</div>
+					<div class="field textarea">
+						<textarea name="description" maxlength="10240" placeholder="(Descrição)"></textarea>
+						<p class="small">Uma descrição da sua análise. É opcional.</p>
+					</div>
+					<div class="field select">
+						<select name="db" required>
+							<option value="" selected>(Base de Dados)</option>
+						</select>
+						<p class="small">Selecione uma <a href="dbs.html">base de dados</a> existente, na qual a sua análise se baseará - apenas bases de dados cuja busca esteja completa são aceitas. Isso não pode ser mudado posteriormente.</p>
+					</div>
+					<div class="field buttons">
+						<button type="submit">Criar &#187;</button>
+						<button type="reset">Cancelar &#171;</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="footer">
+			<p>Twitter Analyser - Todos os dados disponibilizados nesta página são obtidos através da API pública do Twitter.</p>
+		</div>
+	</div>
+	<div id="main-noscreen">
+		<!-- <span>Your screen is too small to display this webpage.</span> -->
+		<span>Sua tela é muito pequena para exibir esta página web.</span>
+	</div>
+</body>
+
+</html>

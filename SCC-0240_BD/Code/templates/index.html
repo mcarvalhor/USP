@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,user-scalable=no">
+	<meta name="robots" content="noindex,nofollow,noarchive,noimageindex">
+	<link rel="icon" type="image/png" href="/static/img/logo-small.png">
+	<link rel="stylesheet" href="/static/css/base.css">
+	<title>Bem-vinde!</title>
+</head>
+
+<body>
+	<div id="main">
+		<div class="header">
+			<div class="large-logo-link">
+				<a href="/" class="logo-link">
+					<img src="/static/img/logo.png" alt="Meu Brasil">
+				</a>
+			</div>
+			<div class="small-logo-link">
+				<a href="/" class="logo-link">
+					<img src="/static/img/logo-small.png" alt="Meu Brasil">
+				</a>
+			</div>
+			<div class="search-box">
+				<form action="/search" class="inline-form" method="get">
+					<div class="field text">
+						<input type="text" name="q" maxlength="1024" placeholder="(buscar um bem-cultural)" value="">
+					</div>
+					<div class="field buttons">
+						<button type="submit">&#128269;</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="content">
+			<h2>Bens-culturais em alta:</h2>
+			{% if found|length < 1 %}
+			<p class="db-noitem">Nenhuma sugestão disponível para você!</p>
+			{% endif %}
+			{% for item in found %}
+			<a href="/view/{{ item[0] }}" class="db-item">
+				<span class="title">{{ item[1] }}</span>
+				<span class="kind">{{ item[4] }}</span>
+				<span class="city">{{ item[2] }} - {{ item[3] }}</span>
+				<p class="description">{{ item[5] }}</p>
+			</a>
+			{% endfor %}
+		</div>
+		<div class="footer">
+			<p>2021 - Trabalho de Bases de Dados - <a href="/setup">(reconstruir a base de dados)</a></p>
+		</div>
+	</div>
+	<div id="main-noscreen">
+		<span>Sua tela é muito pequena para exibir esta página web.</span>
+	</div>
+</body>
+
+</html>

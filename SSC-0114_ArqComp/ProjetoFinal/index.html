@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Cache Coherence Simulator</title>
+	<link rel="stylesheet" href="index.css">
+	<link rel="icon" type="image/png" sizes="16x16 32x32 64x64" href="favicon.png">
+	<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="jquery-ui-1.12.1/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="index.js"></script>
+	<script type="text/javascript">
+		function testScripts() {
+			if(window.jQuery && window.jQuery.ui && window.scriptsLoaded && window.getComputedStyle(document.getElementById("cssTester"), null).display === "none") {
+				windowLoad();
+			} else {
+				document.getElementById("splashScreen").style.display = "none";
+				document.getElementById("noscreen").style.display = "none";
+				document.getElementById("noloadedjs").style.display = "block";
+			}
+		}
+		window.onload = testScripts;
+	</script>
+</head>
+
+<body>
+
+	<div id="main">
+		<div id="noloadedjs" style="display: none;">
+			<span>Os scripts essenciais para a execução da aplicação web não foram carregados. Tente novamente!</span>
+		</div>
+		<div id="cssTester"></div>
+		<div id="blurBackground" style="display: none;"></div>
+		<div id="dialog" style="display: none;">
+			<div id="dialogMessage"></div>
+			<div id="dialogButtons"></div>
+		</div>
+
+		<div id="splashScreen" style="display: block;"><!-- Tela de logotipo da aplicação --></div>
+
+		<!-- Definição do tipo de algoritmo, tamanho das caches e número de processadores, ... -->
+		<div id="homeDefinition" style="display: none;">
+			<form action="javascript:void(0);" onsubmit="submitHome(); return false;">
+				<div class="field">
+					<h1>Definições da Arquitetura</h1>
+				</div>
+				<div class="field">
+					<label for="memoryAlgorithm">Algoritmo de coerência de cache:</label>
+					<select id="memoryAlgorithm" required="required">
+						<option value="" disabled="disabled" selected="selected">(selecione)</option>
+						<option value="msi">MSI (Write-back e write-invalidate)</option>
+						<option value="mesi">MESI (Write-back e Write-invalidate)</option>
+						<option value="vi">VI (Write-through e Write-invalidate)</option>
+					</select>
+				</div>
+				<div class="field">
+					<label for="memorySize">Capacidade da memória principal (RAM):</label>
+					<input type="number" id="memorySize" placeholder="(em palavras)" onchange="calculateMemBytes();" min="1" max="536870912" step="1" required="required">
+					<span id="memorySizeBytes"></span>
+				</div>
+				<div class="field">
+					<label for="nCores">Número de núcleos no processador:</label>
+					<input type="number" id="nCores" placeholder="" min="1" max="4096" step="1" required="required">
+				</div>
+				<div class="field">
+					<label for="cacheLines">Características da cache de cada núcleo:</label>
+					<input type="number" id="cacheLines" placeholder="(linhas na cache)" title="Linhas na cache" onchange="calculateCacheBytes();" min="1" max="536870912" step="1" required="required">
+					<input type="number" id="cacheBlocks" placeholder="(palavras por linha)" title="Palavras por linha" onchange="calculateCacheBytes();" min="1" max="536870912" step="1" required="required">
+					<select id="cacheAlgorithm" required="required">
+						<option value="" disabled="disabled" selected="selected">(algoritmo de substituição)</option>
+						<option value="fifo">FIFO (First-In First-Out)</option>
+						<option value="lru">LRU (Least Recently Used)</option>
+						<option value="lfu">LFU (Least Frequently Used)</option>
+					</select>
+					<span id="cacheSizeBytes"></span>
+				</div>
+				<div class="field">
+					<button type="submit">Próximo &#8620;</button>
+					<button type="button" onclick="document.getElementById('fileInput').click();">Carregar de arquivo &#10514;</button><br>
+				</div>
+				<div class="field">
+					<a href="javascript:void(0);" onclick="alertDialog('Desenvolvido por:<br><br>Cezar Guimarães (Nº 9763209)<br>Leonardo Moreira Kobe (Nº 9778623)<br><a href=\'http://mcarvalhor.com/\' target=\'_blank\'>Matheus</a> Carvalho Raimundo (Nº 10369014)<br>Pedro Pastorello Fernandes (Nº 10262502)');">Sobre...</a>
+				</div>
+				<input type="file" id="fileInput" class="hidden" accept="text/plain,.json" onchange="importMachine(this.files);">
+			</form>
+		</div>
+
+		<!-- Definição das palavras nas posições da memória -->
+		<div id="memoryDefinition" style="display: none;">
+			<form action="javascript:void(0);" onsubmit="submitMemory(); return false;">
+				<div class="field">
+					<h1>Memória RAM</h1>
+				</div>
+				<div class="field">
+					<a href="javascript:void(0);" onclick="alertDialog('Escolha a forma de auto-preenchimento da tabela de valores iniciais para a memória RAM:<br><br><a href=\'javascript:void(0);\' onclick=\'autoFillMem(0);\'>Aleatório 0-4294967295</a><br><a href=\'javascript:void(0);\' onclick=\'autoFillMem(1);\'>Aleatório 0-999</a><br><a href=\'javascript:void(0);\' onclick=\'autoFillMem(2);\'>Crescente a partir do 0</a><br><a href=\'javascript:void(0);\' onclick=\'autoFillMem(3);\'>Crescente a partir do 100</a><br><a href=\'javascript:void(0);\' onclick=\'autoFillMem(4);\'>O endereço multiplicado por 10</a><br><br>AVISO: Isto irá substituir os valores já definidos na tabela.');">Auto-Preencher</a>
+				</div>
+				<div class="table">
+					<table>
+						<thead>
+							<tr>
+								<th>Posição</th>
+								<th>Valor Inicial</th>
+							</tr>
+						</thead>
+						<tbody id="memInitValues"></tbody>
+					</table>
+				</div>
+				<div class="field">
+					<button type="button" onclick="confirmDialog('Se você voltar à tela anterior, vai perder tudo o que já fez nessa tela.', null, backToHome);">Anterior &#8619;</button>
+					<button type="submit">Próximo &#8620;</button>
+				</div>
+			</form>
+		</div>
+
+		<!-- Definição das requisições dos processadores -->
+		<div id="requestsDefinition" style="display: none;">
+				<form action="javascript:void(0);" onsubmit="submitRequests(); return false;">
+					<div class="field">
+						<h1>Requisições dos Núcleos</h1>
+					</div>
+					<div class="list">
+						<table>
+							<thead>
+								<tr>
+									<th>O núcleo</th>
+									<th>lê/escreve</th>
+									<th>no endereço</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody id="coreRequests"></tbody>
+						</table>
+						<input type="text" onfocus="addRequestItem();" placeholder="(adicionar requisição)" readonly="readonly">
+					</div>
+					<div class="field">
+						<button type="button" onclick="confirmDialog('Se você voltar à tela anterior, vai perder tudo o que já fez nessa tela.', null, backToMemory);">Anterior &#8619;</button>
+						<button type="submit">Simular &#8620;</button>
+					</div>
+				</form>
+			</div>
+
+		<!-- Tela da simulação -->
+		<div id="simulation" style="display: none;">
+			<div id="sidebar">
+				<div class="buttons">
+					<button type="button" onclick="confirmDialog('Tem certeza que deseja voltar? Sua simulação será restaurada.', 'Sim', backToRequests, 'Não');">Voltar &#8619;</button>
+					<button type="button" onclick="exportMachine();">Exportar &#10515;</button>
+				</div>
+				<a href="javascript:void(0)" id="downloadLink" download="machine.json" target="_blank"></a>
+				<div class="settings">
+					<label><input type="checkbox" onchange="toggleSidebarFixed(this.checked);"> Fixo</label>
+					<label>Velocidade:<br><input type="range" onchange="toggleSpeed(this.value, this.max);" min="0" max="5000" value="4000" style="width: 275px;background-color: rgb(255, 255, 255);"></label>
+				</div>
+				<div id="requests"></div>
+				<div class="buttons">
+					<button onclick="resetMachine();">Resetar &#8612;</button>
+				</div>
+			</div>
+			<div id="simulationFrame">
+				<div id="coresCPU"></div>
+				<div id="scrollLeft"></div>
+				<div id="scrollRight"></div>
+				<div id="memoryBus"></div>
+				<div id="mainMemoryBus"></div>
+				<div id="mainMemory">
+					<table>
+						<thead>
+							<tr>
+								<th>Posição</th>
+								<th>Valor</th>
+							</tr>
+						</thead>
+						<tbody id="mainMemoryWords"></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<noscript>
+		<div id="nojs">
+			<span>O JavaScript não está ativado em seu navegador. Por favor, ative-o!</span>
+		</div>
+	</noscript>
+
+	<div id="noscreen">
+		<span>Sua tela é muito pequena para exibir o conteúdo. Tente usar uma tela maior.</span>
+	</div>
+
+</body>
+
+</html>

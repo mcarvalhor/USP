@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>Finite State Machine WebApp - SD - ICMC/USP 2017.2</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="index.css">
+	<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="jquery-ui-1.12.1/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="index.js"></script>
+	<script type="text/javascript">
+		function Main(){
+			if( (typeof FSM !== "undefined") && (typeof jQuery !== "undefined") ){
+				window.onresize=UpdateView;
+				/*window.onbeforeunload=WindowExit;
+				window.onkeypress=KeyPress;
+				window.onkeyup=KeyUp;
+				window.onmousedown=MouseDown;
+				window.onmouseup=MouseUp;
+				window.ontouchstart=TouchStart;
+				window.ontouchend=TouchEnd;
+				window.oncontextmenu=BreakEvent;
+				window.onselect=BreakEvent;
+				window.onselectstart=BreakEvent;*/
+				document.getElementById("Screen").style.display="block";
+				setTimeout(MainFSM, 2000);
+			}else{
+				document.getElementById("web_errorjs").style.display="block";
+			}
+		}
+		window.onload=Main;
+	</script>
+</head>
+<body>
+	<div id="web_s">
+		<div id="Screen" style="display:none;">
+			<div id="HiddenElements" style="display:none;">
+				<datalist id="FSM_Datalist_Outputs"></datalist>
+				<datalist id="FSM_Datalist_States"></datalist>
+				<form action="#" method="get" id="Form_File">
+					<input type="file" id="Form_File_Chooser" onchange="ParseFile(this.files);">
+				</form>
+			</div>
+			<div id="SplashScreen" style="display:block;background-image:url('splash.png');"></div>
+			<div id="DevelopMachine" style="display:none;">
+				<div class="f_description">
+					<span>Para iniciar, descreva sua máquina.</span>
+				</div>
+				<form action="#" method="get" onsubmit="GenMachineTable();return false;">
+					<div class="f_input">
+						<a href="javascript:void(0);" onclick="document.getElementById('Form_File_Chooser').click();">Carregar arquivo</a>
+					</div>
+					<div class="f_input">
+						<label><input type="radio" name="machine_type" id="fi_machinetype_moore" value="moore" checked> Moore</label>
+						<label><input type="radio" name="machine_type" id="fi_machinetype_mealy" value="mealy"> Mealy</label>
+					</div>
+					<div class="f_input">
+						<label class="f_header">Entradas da sua máquina:</label>
+						<div id="Form_Inputs" class="f_dyninputs">
+							<!--<span><input type="text" placeholder="Nome da entrada"><a href="javascript:void(0);" onclick="MoveMeUp(this);">&uarr;</a><a href="javascript:void(0);" onclick="MoveMeDown(this);">&darr;</a><a href="javascript:void(0);" onclick="DeleteMe(this);">x</a></span>-->
+						</div>
+						<div class="f_click">
+							<input type="text" onfocus="AddInput();" placeholder="Nome da entrada..." readonly>
+						</div>
+					</div>
+					<div class="f_input">
+						<label class="f_header">Saídas da sua máquina:</label>
+						<div id="Form_Outputs" class="f_dyninputs">
+							<!--<span><input type="text" placeholder="Nome da saída"><a href="javascript:void(0);" onclick="MoveMeUp(this);">&uarr;</a><a href="javascript:void(0);" onclick="MoveMeDown(this);">&darr;</a><a href="javascript:void(0);" onclick="DeleteMe(this);">x</a></span>-->
+						</div>
+						<div class="f_click">
+							<input type="text" onfocus="AddOutput();" placeholder="Nome da saída..." readonly>
+						</div>
+					</div>
+					<div class="f_input">
+						<label class="f_header">Estados da sua máquina:</label>
+						<div id="Form_States" class="f_dyninputs">
+							<!--<span><input type="text" placeholder="Nome (ou codificação) do estado"><a href="javascript:void(0);" onclick="MoveMeUp(this);">&uarr;</a><a href="javascript:void(0);" onclick="MoveMeDown(this);">&darr;</a><a href="javascript:void(0);" onclick="DeleteMe(this);">x</a></span>-->
+						</div>
+						<div class="f_click">
+							<input type="text" onfocus="AddState();" placeholder="Nome (ou codificação) do estado..." readonly>
+						</div>
+					</div>
+					<button type="submit" class="f_button">Próximo &#8620;</button>
+				</form>
+			</div>
+			<div id="DevelopMachineArchitecture" style="display:none;">
+				<div class="f_description">
+					<span>Agora, a tabela-verdade.</span>
+				</div>
+				<table class="f_input f_table">
+					<thead><tr><th></th><th>Estado</th><th>Próximo estado</th><th>Saída</th></tr></thead>
+					<tbody id="Form_Table"></tbody>
+				</table>
+				<div id="ConfigureBox" style="display:none;">
+					<div id="ConfigureBoxBackground"></div>
+					<div id="ConfigureBox_WC">
+						<form action="#" method="get" onsubmit="SaveWCConfigs();return false;" onreset="CancelWCConfigs();return false;">
+							<div id="ConfigureBox_WC_Message" class="f_description"></div>
+							<div class="f_input">
+								<label class="f_header" style="display:block;">Use as próprias entradas para as equações Verilog:</label>
+								<label id="ConfigureBox_WC_Inputs" class="f_subheader"></label>
+							</div>
+							<div class="f_input">
+								<div id="Form_WC_Configs" class="f_wcdyninputs"></div>
+								<div class="f_click">
+									<input type="text" onfocus="AddConditionedConfig();" id="ConfigureBox_WC_Placeholder" placeholder="" readonly>
+								</div>
+							</div>
+							<div class="messageBox_buttons">
+								<button type="submit" class="f_button">Salvar</button>
+								<button type="reset" class="f_button">Cancelar</button>
+							</div>
+						</form>
+					</div>
+					<div id="ConfigureBox_NC">
+						<form action="#" method="get" onsubmit="SaveNCConfigs();return false;" onreset="CancelNCConfigs();return false;">
+							<div id="ConfigureBox_NC_Message" class="f_description">Quais as saídas desse estado?</div>
+							<div class="f_input">
+								<div id="Form_NC_Configs" class="f_ncdyninputs"></div>
+								<div class="f_click">
+									<input type="text" onfocus="AddConfig();" placeholder="Saída..." readonly>
+								</div>
+							</div>
+							<div class="messageBox_buttons">
+								<button type="submit" class="f_button">Salvar</button>
+								<button type="reset" class="f_button">Cancelar</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<button onclick="ConfirmBox('Tem certeza que deseja voltar? Tudo o que você alterou aqui será perdido.', BackToMachineDescription, BreakEvent);" class="f_button">Voltar &#8619;</button>
+				<button onclick="Start();" class="f_button">Finalizar e Simular &#8620;</button>
+			</div>
+			<div id="DeployMachine" style="display:none;">
+				<div id="InputsMenu">
+					<div id="InputsMenuContent">
+						<div class="messageBox_buttons" style="text-align:center;">
+							<button class="f_button" onclick="ConfirmBox('Tem certeza que deseja voltar? Sua simulação será resetada.', BackToMachineArchitecture, BreakEvent);" style="font-size:1em;">Voltar à tabela verdade  &#8619;</button>
+						</div>
+						<div class="f_input">
+							<label><input type="checkbox" onchange="ToggleFixed('InputsMenu',this.checked);"> Fixar</label>
+							<label><input type="checkbox" id="DefaultSimulationVision" onchange="UpdateView();"> Visão geral</label>
+						</div>
+						<table class="f_input f_inputtable">
+							<tbody id="Inputs_Bar"></tbody>
+						</table>
+						<div class="messageBox_buttons" style="text-align:center;">
+							<button class="f_button" onclick="Clock();" title="Envia um sinal de 'clock'.">Clock</button>
+							<button class="f_button" onclick="ResetClock();" title="Retorna a máquina ao estado inicial.">Reset</button>
+						</div>
+					</div>
+				</div>
+				<div id="OutputsMenu">
+					<div id="OutputsMenuContent">
+						<div id="CurrentState_Bar" class="f_descriptionscroll"></div>
+						<div class="f_input">
+								<label><input type="checkbox" onchange="ToggleFixed('OutputsMenu',this.checked);"> Fixar</label>
+							</div>
+						<table class="f_input f_outputtable">
+							<tbody id="Outputs_Bar"></tbody>
+						</table>
+					</div>
+				</div>
+				<div id="States_Panel">
+					<div id="States"></div>
+				</div>
+				<div id="ShowEdgeInformation" style="display:none;">
+					<div id="ShowEdgeInformation_Text"></div>
+					<div id="ShowEdgeInformation_Table"></div>
+				</div>
+			</div>
+			<div id="MessageBox" style="display:none;">
+				<div id="MessageBoxBackground"></div>
+				<div class="messageBox" id="AlertBox">
+					<div class="messageBox_text" id="MessageAlertBox"></div>
+					<div class="messageBox_buttons">
+						<a href="javascript:void(0);" onclick="MessageBox.close(MessageBox.onok(), 'AlertBox');">Ok</a>
+					</div>
+				</div>
+				<div class="messageBox" id="ConfirmBox">
+					<div class="messageBox_text" id="MessageConfirmBox"></div>
+					<div class="messageBox_buttons">
+						<a href="javascript:void(0);" onclick="MessageBox.close(MessageBox.onyes(), 'ConfirmBox');">Sim</a>
+						<a href="javascript:void(0);" onclick="MessageBox.close(MessageBox.onno(), 'ConfirmBox');">Não</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="web_errorjs" style="display:none;">
+		<span>Houve um erro ao carregar os Scripts da página. Atualize e tente de novo.</span>
+	</div>
+	<noscript><div id="web_nojs">
+		<span>Por favor, ative o JavaScript em seu navegador.</span>
+	</div></noscript>
+	<div id="web_nos">
+		<span>Por favor, utilize uma tela/janela maior (maior resolução) para visualizar corretamente tudo o que irá acontecer aqui.</span>
+	</div>
+	<div id="web_errorcss" style="position:fixed;top:0px;left:0px;bottom:0px;right:0px;width:100%;height:100%;width:100%;height:100%;padding:10px;background-color:rgb(255,255,255);z-index:1000;">
+		<span>Houve um erro ao carregar os estilos da página. Atualize e tente de novo.</span>
+	</div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,user-scalable=no">
+	<meta name="robots" content="noindex,nofollow,noarchive,noimageindex">
+	<link rel="icon" type="image/png" href="/static/img/logo-small.png">
+	<link rel="stylesheet" href="/static/css/base.css">
+	<title>Bem-cultural: {{ title }}</title>
+</head>
+
+<body>
+	<div id="main">
+		<div class="header">
+			<div class="large-logo-link">
+				<a href="/home" class="logo-link">
+					<img src="/static/img/logo.png" alt="Meu Brasil">
+				</a>
+			</div>
+			<div class="small-logo-link">
+				<a href="/home" class="logo-link">
+					<img src="/static/img/logo-small.png" alt="Meu Brasil">
+				</a>
+			</div>
+			<div class="search-box">
+				<form action="/search" class="inline-form" method="get">
+					<div class="field text">
+						<input type="text" name="q" maxlength="1024" placeholder="(buscar um bem-cultural)" value="">
+					</div>
+					<div class="field buttons">
+						<button type="submit">&#128269;</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="content">
+			<div class="db-item db-item-noeffect">
+				<span class="title">{{ title }}</span>
+				<span class="kind">{{ kind }}</span>
+				<span class="city">{{ city[0] }} - {{ city[1] }}</span>
+				<p class="description">{{ description }}</p>
+				<table class="details">
+					<tr>
+						<th>Data de cadastro:</th>
+						<th>{{ date }}</th>
+					</tr>
+					<tr>
+						<th>Palavras-chave:</th>
+						<th>{{ keywords }}</th>
+					</tr>
+					{% for name, value in details.items() %}
+					<tr>
+						<th>{{ name }}:</th>
+						<th>{{ value }}</th>
+					</tr>
+					{% endfor %}
+				</table>
+			</div>
+			<form action="/report/{{ id }}" class="form" method="get">
+				<div class="field buttons">
+					<button class="red" type="submit">Fazer uma Denúncia</button>
+				</div>
+			</form>
+		</div>
+		<div class="footer">
+			<p>2021 - Trabalho de Bases de Dados - <a href="/setup">(reconstruir a base de dados)</a></p>
+		</div>
+	</div>
+	<div id="main-noscreen">
+		<span>Sua tela é muito pequena para exibir esta página web.</span>
+	</div>
+</body>
+
+</html>

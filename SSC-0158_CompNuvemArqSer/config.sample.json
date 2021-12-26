@@ -1,0 +1,13 @@
+{
+	"database": {
+		"host": "YOUR_DATABASE_HOSTNAME",
+		"user": "YOUR_DATABASE_USERNAME",
+		"passwd": "YOUR_DATABASE_PASSWORD",
+		"name": "YOUR_DATABASE_NAME"
+	},
+	"twitter": {
+		"api_key": "YOUR_TWITTER_API_KEY",
+		"api_secret": "YOUR_TWITTER_API_SECRET"
+	},
+	"kafka": "YOUR_KAFKA_CONNECTION_STRING"
+}

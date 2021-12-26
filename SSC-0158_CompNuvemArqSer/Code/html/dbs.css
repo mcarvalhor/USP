@@ -1,0 +1,67 @@
+
+.content {
+	max-width: 600px;
+}
+
+#content-loading {
+	text-align: center;
+}
+
+#content-error {
+	color: rgb(255, 0, 0);
+	text-align: center;
+}
+
+#content-data .db-add {
+	display: block;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+#content-data .db-add a {
+	display: inline-block;
+	margin: 0px auto;
+	padding: 3px;
+	height: 44px;
+	line-height: 44px;
+	vertical-align: middle;
+	border-radius: 10px;
+	color: rgb(0, 0, 0);
+	background-color: transparent;
+	text-decoration: none;
+	font-weight: bold;
+	text-align: center;
+}
+
+#content-data .db-add a:hover {
+	color: rgb(0, 0, 0);
+	background-color: rgb(150, 200, 242);
+}
+
+#content-data .db-item {
+	display: block;
+	margin-bottom: 20px;
+	padding: 10px;
+	border-radius: 20px;
+	background-color: rgb(240, 240, 240);
+}
+
+#content-data .db-item:last-child {
+	margin-bottom: 0px;
+}
+
+#content-data .db-item a {
+	float: right;
+}
+
+#content-data .db-item .db-item-done {
+	color: rgb(0, 160, 0);
+}
+
+#content-data .db-item .db-item-progress {
+	color: rgb(160, 160, 0);
+}
+
+#content-data .db-item p {
+	text-align: justify;
+}

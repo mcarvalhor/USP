@@ -1,0 +1,6 @@
+Faça um programa que, dado um conjunto de inteiros por linhas, leia cada inteiro e mostre a soma dos valores. A quantidade de linhas a serem lidas é um valor inteiro no início da entrada, em uma linha isolada.
+
+para a entrada: 5 1 1 1 1 1 1 1 1 1 
+1 1
+
+A saida será 21407

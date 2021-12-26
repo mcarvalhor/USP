@@ -1,0 +1,20 @@
+
+Matheus Carvalho Raimundo
+mcarvalhor@usp.br
+
+
+== Main.c ==
+	Contém a função principal "main()" e o código que rodará inicialmente no programa.
+
+== UnlimitedInteger.c UnlimitedInteger.h ==
+	Esta biblioteca contém tudo o que é necessário para lidar com números imensos.
+	No caso, números sem limites.
+
+== List.c List.h ==
+	Esta biblioteca contém tudo o que é necessário para lidar com listas enumeradas.
+	Ela é usada na biblioteca "UnlimitedIntegers.h" como forma de armazenar os algarismos.
+
+
+O programa pode ser executado através do comando "make run".
+
+

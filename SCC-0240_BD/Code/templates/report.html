@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,user-scalable=no">
+	<meta name="robots" content="noindex,nofollow,noarchive,noimageindex">
+	<link rel="icon" type="image/png" href="/static/img/logo-small.png">
+	<link rel="stylesheet" href="/static/css/base.css">
+	<title>Denunciar: {{ title }}</title>
+</head>
+
+<body>
+	<div id="main">
+		<div class="header">
+			<div class="large-logo-link">
+				<a href="/home" class="logo-link">
+					<img src="/static/img/logo.png" alt="Meu Brasil">
+				</a>
+			</div>
+			<div class="small-logo-link">
+				<a href="/home" class="logo-link">
+					<img src="/static/img/logo-small.png" alt="Meu Brasil">
+				</a>
+			</div>
+			<div class="search-box">
+				<form action="/search" class="inline-form" method="get">
+					<div class="field text">
+						<input type="text" name="q" maxlength="1024" placeholder="(buscar um bem-cultural)" value="">
+					</div>
+					<div class="field buttons">
+						<button type="submit">&#128269;</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="content">
+			<form action="/report/{{ id }}" class="form" method="post">
+				<input type="hidden" name="id" value="{{ id }}">
+				<h2>Denunciar: {{ title }}</h2>
+				<div class="field select">
+					<select name="user" required>
+						<option value="" disabled selected>(selecione o cidadão)</option>
+						{% for user in users %}
+						<option value="{{ user[0] }}">{{ user[1] }} ({{ user[2] }})</option>
+						{% endfor %}
+					</select>
+					<p class="small">Selecione qual cidadão está fazendo a denúncia.</p>
+				</div>
+				<div class="field datetime">
+					<input type="date" name="date" required><input type="time" name="time" required>
+					<p class="small">Insira a data e hora da denúncia.</p>
+				</div>
+				<div class="field textarea">
+					<textarea name="description" maxlength="450" placeholder="(Descrição)" required></textarea>
+					<p class="small">Descreva sua ocorrência.</p>
+				</div>
+				<div class="field select">
+					<select name="type" required>
+						<option value="" disabled selected>(selecione o tipo de ocorrência)</option>
+						{% for type in report_types %}
+						<option value="{{ type[0] }}">{{ type[1] }}</option>
+						{% endfor %}
+					</select>
+					<p class="small">Selecione o tipo de ocorrência.</p>
+				</div>
+				<div class="field buttons">
+					<button class="red" type="submit">Enviar Denúncia &#187;</button>
+				</div>
+			</form>
+		</div>
+		<div class="footer">
+			<p>2021 - Trabalho de Bases de Dados - <a href="/setup">(reconstruir a base de dados)</a></p>
+		</div>
+	</div>
+	<div id="main-noscreen">
+		<span>Sua tela é muito pequena para exibir esta página web.</span>
+	</div>
+</body>
+
+</html>

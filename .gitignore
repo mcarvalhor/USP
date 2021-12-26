@@ -1,0 +1,10 @@
+# IDEs.
+.idea/
+.vscode/
+.ipynb_checkpoints/
+
+# Downloaded libraries.
+node_modules/
+
+# Generated files.
+__pycache__
